@@ -1,5 +1,4 @@
-#include "teacher.h"
-
+#include "teacher/teacher.h"
 
 int main() {
 
@@ -7,6 +6,6 @@ int main() {
     person.Set();
     person.Print();
     person.PrintTotalWage();
-    person.PrintToFile(); //пока  не работает, может не верный путь
+    person.PrintToFile("/home/kirill/Рабочий стол/data");
     return 0;
 }

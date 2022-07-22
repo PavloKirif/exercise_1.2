@@ -30,28 +30,28 @@ void Teacher::PrintTotalWage() {
     std::cout << "Wage is: " << wage << "\n";
 
     float premium_coeff;
-    int end = sizeof(years_for_Premium)/sizeof(int);
-    if (experience < static_cast<float>(years_for_Premium[0])){
-        premium_coeff = static_cast<float>(interest_for_Premium[0]);
+
+    if (experience <= years_for_Premium[0]){
+        premium_coeff = interest_for_Premium[0];
     }
-    else if (experience > static_cast<float>(years_for_Premium[end - 1])) {
-        premium_coeff = static_cast<float>(interest_for_Premium[end]);
+    else if (experience > years_for_Premium[years_for_Premium.size() - 1]) {
+        premium_coeff = interest_for_Premium[years_for_Premium.size()];
     }
     else {
-        for (int i = 1; i < end; i++) {
-            if (experience > static_cast<float>(years_for_Premium[i-1]) && experience <= static_cast<float>(years_for_Premium[i])){
-                premium_coeff = static_cast<float>(interest_for_Premium[i]);
+        for (int i = 1; i < years_for_Premium.size(); i++) {
+            if (experience > years_for_Premium[i-1] && experience <= years_for_Premium[i]){
+                premium_coeff = interest_for_Premium[i];
                 break;
             }
         }
     }
     float premium = wage * premium_coeff / 100;
-    std::cout << "Premium is: " << (premium*100)/100 << "\n";
+    std::cout << "Premium is: " << std::round(premium * 100) / 100 << "\n";
 }
 
-void Teacher::PrintToFile() {
+void Teacher::PrintToFile(const std::string &path) {
     std::ofstream out;
-    out.open("/home/kirill/'Рабочий стол'/data");
+    out.open(path);
     if (out.is_open()) {
         out << "Surname: " << this->surname << "\n" << "Experience: " << this->experience << "\n" << "Hourly wage: "
             << this->hourly_wage << "\n" << "Number of academic hours spent: " << this->spent_hours << "\n";
